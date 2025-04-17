@@ -6,7 +6,7 @@ import pprint
 import collections
 
 
-excel_wine = pandas.read_excel("wine3.xlsx", sheet_name='Лист1', keep_default_na=False)
+excel_wine = pandas.read_excel("wine_сatalog.xlsx", sheet_name='Лист1', keep_default_na=False)
 excel_list_wine3 = excel_wine.to_dict(orient='records')
 excel_list_wine = collections.defaultdict(list)
 
