@@ -27,7 +27,7 @@ def main():
     together_years = today.year - wine_found_year
 
 
-    def spell(together_years):
+    def get_year_word(together_years):
         if together_years % 100 in range(11, 20):
             return "лет"
         else:
@@ -50,7 +50,7 @@ def main():
 
     rendered_page = template.render(
         together_years=together_years,
-        time_period=spell(together_years),
+        time_period=get_year_word(together_years),
         excel_wine=excel_wine
         )
 
