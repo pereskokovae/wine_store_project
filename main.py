@@ -24,14 +24,14 @@ def main():
 
     today = datetime.datetime.now()
     year_found_wine = 1920
-    delta = today.year - year_found_wine
+    years_together = today.year - year_found_wine
 
 
-    def spell(delta):
-        if delta % 100 in range(11, 20):
+    def spell(years_together):
+        if years_together % 100 in range(11, 20):
             return "лет"
         else:
-            last_digit = delta % 10
+            last_digit = years_together % 10
             if last_digit == 1:
                 return "год"
             elif last_digit in [2, 3, 4]:
@@ -49,9 +49,9 @@ def main():
     template = env.get_template('template.html')
 
     rendered_page = template.render(
-        years_together=delta,
-        time_period=spell(delta),
-        excel_list_wine=excel_list_wine
+        years_together=years_together,
+        time_period=spell(years_together),
+        excel_wine=excel_wine
         )
 
     with open('index.html', 'w', encoding="utf8") as file:
