@@ -2,17 +2,16 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
-import pprint
 import collections
 
 
 def main():
-    excel_wine = pandas.read_excel("wine_сatalog.xlsx", sheet_name='Лист1', keep_default_na=False)
-    excel_list_wine3 = excel_wine.to_dict(orient='records')
-    excel_list_wine = collections.defaultdict(list)
+    excel_read = pandas.read_excel("wine_сatalog.xlsx", sheet_name='Лист1', keep_default_na=False)
+    excel_read_wine = excel_read.to_dict(orient='records')
+    excel_wine = collections.defaultdict(list)
 
 
-    for wine in excel_list_wine3:
+    for wine in excel_read_wine:
         category = wine['Категория']
         name = wine['Название']
         sort = wine['Сорт']
@@ -20,7 +19,7 @@ def main():
         image = wine['Картинка']
         favorable_offer = wine['Акция']
 
-        excel_list_wine[category].append(wine)
+        excel_wine[category].append(wine)
 
 
     today = datetime.datetime.now()
