@@ -3,10 +3,18 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
 import collections
+import argparse
 
 
 def main():
-    excel_read = pandas.read_excel("wine_сatalog.xlsx", sheet_name='Лист1', keep_default_na=False)
+    parser = argparse.ArgumentParser(
+        description='Описание что делает программа'
+        )
+    parser.add_argument("-f", "--filename", help="Введите имя файла", required=True)
+    args = parser.parse_args()
+
+
+    excel_read = pandas.read_excel(args, sheet_name='Лист1', keep_default_na=False)
     wine_catalog = excel_read.to_dict(orient='records')
     excel_wine = collections.defaultdict(list)
 
@@ -38,7 +46,6 @@ def main():
                 return "года"
             else:
                 return "лет"
-
 
 
     env = Environment(
