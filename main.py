@@ -16,7 +16,7 @@ def main():
 
     excel_read = pandas.read_excel(args.filename, sheet_name='Лист1', keep_default_na=False)
     wine_catalog = excel_read.to_dict(orient='records')
-    excel_wine = collections.defaultdict(list)
+    excel_wines = collections.defaultdict(list)
 
 
     for wine in wine_catalog:
@@ -27,7 +27,7 @@ def main():
         image = wine['Картинка']
         favorable_offer = wine['Акция']
 
-        excel_wine[category].append(wine)
+        excel_wines[category].append(wine)
 
 
     today = datetime.datetime.now()
@@ -58,7 +58,7 @@ def main():
     rendered_page = template.render(
         together_years=together_years,
         time_period=get_year_word(together_years),
-        excel_wine=excel_wine
+        excel_wines=excel_wines
         )
 
     with open('index.html', 'w', encoding="utf8") as file:
