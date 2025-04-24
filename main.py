@@ -8,13 +8,13 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Описание что делает программа'
+        description='Программа откроет ваш Exel файл для дальнейшей обработки информации'
         )
-    parser.add_argument("-f", "--filename", help="Введите имя файла", required=True)
+    parser.add_argument("-f", help="Введите имя Exel файла", required=True)
     args = parser.parse_args()
 
 
-    excel_read = pandas.read_excel(args, sheet_name='Лист1', keep_default_na=False)
+    excel_read = pandas.read_excel(args.filename, sheet_name='Лист1', keep_default_na=False)
     wine_catalog = excel_read.to_dict(orient='records')
     excel_wine = collections.defaultdict(list)
 
