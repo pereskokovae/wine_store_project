@@ -10,7 +10,7 @@ def main():
     parser = argparse.ArgumentParser(
         description='Программа откроет ваш Exel файл для дальнейшей обработки информации'
         )
-    parser.add_argument("-f", help="Введите имя Exel файла", required=True)
+    parser.add_argument("-f", "--filename", help="Введите имя Exel файла", required=True)
     args = parser.parse_args()
 
 
@@ -30,11 +30,12 @@ def main():
         excel_wines[category].append(wine)
 
 
-    def get_year_word():
-        today = datetime.datetime.now()
-        wine_found_year = 1920
-        together_years = today.year - wine_found_year
+    today = datetime.datetime.now()
+    wine_found_year = 1920
+    together_years = today.year - wine_found_year
 
+
+    def get_year_word():
         if together_years % 100 in range(11, 20):
             return "лет"
         else:
@@ -46,7 +47,7 @@ def main():
             else:
                 return "лет"
 
-
+            
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -55,7 +56,7 @@ def main():
     template = env.get_template('template.html')
 
     rendered_page = template.render(
-        together_years=datetime.datetime.now(),
+        together_years=together_years,
         time_period=get_year_word(),
         excel_wines=excel_wines
         )
