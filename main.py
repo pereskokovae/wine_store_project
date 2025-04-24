@@ -30,12 +30,11 @@ def main():
         excel_wines[category].append(wine)
 
 
-    today = datetime.datetime.now()
-    wine_found_year = 1920
-    together_years = today.year - wine_found_year
+    def get_year_word():
+        today = datetime.datetime.now()
+        wine_found_year = 1920
+        together_years = today.year - wine_found_year
 
-
-    def get_year_word(together_years):
         if together_years % 100 in range(11, 20):
             return "лет"
         else:
@@ -56,8 +55,8 @@ def main():
     template = env.get_template('template.html')
 
     rendered_page = template.render(
-        together_years=together_years,
-        time_period=get_year_word(together_years),
+        together_years=datetime.datetime.now(),
+        time_period=get_year_word(),
         excel_wines=excel_wines
         )
 
