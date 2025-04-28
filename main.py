@@ -6,10 +6,22 @@ import collections
 import argparse
 
 
+def get_year_word(together_years):
+    if together_years % 100 in range(11, 20):
+        return "лет"
+    else:
+        last_digit = together_years % 10
+        if last_digit == 1:
+            return "год"
+        elif last_digit in [2, 3, 4]:
+            return "года"
+    return "лет"
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Программа откроет ваш Exel файл для дальнейшей обработки информации'
-        )
+    )
     parser.add_argument("-f", "--filename", help="Введите имя Exel файла", required=True)
     args = parser.parse_args()
 
@@ -34,19 +46,6 @@ def main():
     wine_found_year = 1920
     together_years = today.year - wine_found_year
 
-
-    def get_year_word():
-        if together_years % 100 in range(11, 20):
-            return "лет"
-        else:
-            last_digit = together_years % 10
-            if last_digit == 1:
-                return "год"
-            elif last_digit in [2, 3, 4]:
-                return "года"
-            else:
-                return "лет"
-
             
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -59,7 +58,7 @@ def main():
         together_years=together_years,
         time_period=get_year_word(),
         excel_wines=excel_wines
-        )
+    )
 
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
